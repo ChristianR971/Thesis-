@@ -1,7 +1,6 @@
 # Intervention-1
 Code Thesis Intervention 1
 
-#%% Importing MARIO 
 import mario
 import pandas as pd
 import numpy as np
@@ -75,27 +74,97 @@ delta_E_s1 = data_exio.query(
 
 #%% Employment shock calculations Intervention 1
 
-# Emp_s1 = data_exio.query(
-#     matrices='E',
-#     scenarios='Intervention 1',
-#     ).loc[data_exio.index.isin([
-#         'Employment: Low-skilled male', 
-#         'Employment: Low-skilled female', 
-#         'Employment: Medium-skilled male',
-#         'Employment: Medium-skilled female',
-#         'Employment: High-skilled male',
-#         'Employment: High-skilled female'
-#     ])]
+Employment = ['Employment: Low-skilled male', 
+'Employment: Low-skilled female',
+'Employment: Medium-skilled male',
+'Employment: Medium-skilled female',
+'Employment: High-skilled male',
+'Employment: High-skilled female']
+
+
+Emp_1 = data_exio.query(
+    matrices='E',
+    scenarios='Intervention 1',
+    ).loc[Employment].sum()
+
+
+Emp_baseline1 = data_exio.query(
+    matrices='E',
+    scenarios='baseline',
+    ).loc[Employment].sum()
+
+delta_Emp_1 = data_exio.query(
+    matrices='E',
+    scenarios='Intervention 1',
+    base_scenario='baseline',
+    type='relative',
+    ).loc[Employment].sum()
+
+#%%
 
 Emp_s1 = data_exio.query(
     matrices='E',
     scenarios='Intervention 1',
-    ).iloc[([
+    ).loc[([
         'Employment: Low-skilled male', 
         'Employment: Low-skilled female',
         'Employment: Medium-skilled male',
         'Employment: Medium-skilled female',
         'Employment: High-skilled male',
         'Employment: High-skilled female'
-        ])]
+        ])].sum()
 
+Emp_baseline = data_exio.query(
+    matrices='E',
+    scenarios='baseline',
+    ).loc[([
+        'Employment: Low-skilled male', 
+        'Employment: Low-skilled female',
+        'Employment: Medium-skilled male',
+        'Employment: Medium-skilled female',
+        'Employment: High-skilled male',
+        'Employment: High-skilled female'
+        ])].sum()
+
+delta_Emp_s1 = data_exio.query(
+    matrices='E',
+    scenarios='Intervention 1',
+    base_scenario='baseline',
+    type='relative',
+    ).loc[([
+        'Employment: Low-skilled male', 
+        'Employment: Low-skilled female',
+        'Employment: Medium-skilled male',
+        'Employment: Medium-skilled female',
+        'Employment: High-skilled male',
+        'Employment: High-skilled female'
+        ])].sum()
+        
+        
+#%% Value Added shock calculations Intervention 1 
+ValueAdded = ['Taxes less subsidies on products purchased: Total',
+'Other net taxes on production',
+'Compensation of employees; wages, salaries, & employers''social contributions: Low-skilled',
+'Compensation of employees; wages, salaries, & employers' 'social contributions: Medium-skilled',
+'Compensation of employees; wages, salaries, & employers' 'social contributions: High-skilled',
+'Operating surplus: Consumption of fixed capital',
+'Operating surplus: Rents on land',
+'Operating surplus: Royalties on resources',
+'Operating surplus: Remaining net operating surplus']
+
+VA_s1 = data_exio.query(
+    matrices='M',
+    scenarios='Intervention 1',
+    ).loc[ValueAdded].sum()
+
+VA_baseline = data_exio.query(
+    matrices='M',
+    scenarios='baseline',
+    ).loc[(ValueAdded)].sum()
+
+delta_VA_s1 = data_exio.query(
+    matrices="M",
+    scenarios="Intervention 1",
+    base_scenario="baseline",
+    type='relative'
+    ).loc[(ValueAdded)].sum()

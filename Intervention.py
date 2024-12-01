@@ -81,7 +81,6 @@ Employment = ['Employment: Low-skilled male',
 'Employment: High-skilled male',
 'Employment: High-skilled female']
 
-
 Emp_1 = data_exio.query(
     matrices='E',
     scenarios='Intervention 1',
@@ -100,47 +99,6 @@ delta_Emp_1 = data_exio.query(
     type='relative',
     ).loc[Employment].sum()
 
-#%%
-
-Emp_s1 = data_exio.query(
-    matrices='E',
-    scenarios='Intervention 1',
-    ).loc[([
-        'Employment: Low-skilled male', 
-        'Employment: Low-skilled female',
-        'Employment: Medium-skilled male',
-        'Employment: Medium-skilled female',
-        'Employment: High-skilled male',
-        'Employment: High-skilled female'
-        ])].sum()
-
-Emp_baseline = data_exio.query(
-    matrices='E',
-    scenarios='baseline',
-    ).loc[([
-        'Employment: Low-skilled male', 
-        'Employment: Low-skilled female',
-        'Employment: Medium-skilled male',
-        'Employment: Medium-skilled female',
-        'Employment: High-skilled male',
-        'Employment: High-skilled female'
-        ])].sum()
-
-delta_Emp_s1 = data_exio.query(
-    matrices='E',
-    scenarios='Intervention 1',
-    base_scenario='baseline',
-    type='relative',
-    ).loc[([
-        'Employment: Low-skilled male', 
-        'Employment: Low-skilled female',
-        'Employment: Medium-skilled male',
-        'Employment: Medium-skilled female',
-        'Employment: High-skilled male',
-        'Employment: High-skilled female'
-        ])].sum()
-        
-        
 #%% Value Added shock calculations Intervention 1 
 ValueAdded = ['Taxes less subsidies on products purchased: Total',
 'Other net taxes on production',

@@ -133,48 +133,44 @@ delta_VA_s1 = data_exio.query(
 
 
 
-#%% CO2 plot
-
-CO2_s1.plot_matrix('E','Regions','red',y='Value',item='Sector',facet_row='CO2_emissions')
+#%% Plots waar iets uitkomt 
 
 
-#%% MARIO matrix plot 
-delta_E_s1.plot(kind="bar", x='Region')
-delta_VA_s1.plot(kind="bar")
+delta_E_s1_EU = delta_E_s1.head(16)
+delta_E_s1_EU.plot(kind='bar', color='red') 
+plt.title("Plot of delta CO2 of the EU")
+plt.xlabel("index")
+plt.ylabel("CO2 difference with the baseline")
+plt.grid(True)
+
+plt.show()
 
 
+delta_E_s1_RoW = delta_E_s1.tail(16)
+delta_E_s1_RoW.plot(kind='bar', color='red') 
+plt.title("Plot of delta CO2 of the Rest of the World")
+plt.xlabel("index")
+plt.ylabel("CO2 difference with the baseline")
+plt.grid(True)
+
+plt.show()
+
+delta_Emp_1_EU = delta_Emp_1.head(16)
+delta_Emp_1_EU.plot(kind='bar', color='red') 
+plt.title("Plot of delta employment of the EU")
+plt.xlabel("index")
+plt.ylabel("CO2 difference with the baseline")
+plt.grid(True)
+
+plt.show()
+
+
+delta_Emp_1_RoW = delta_Emp_1.tail(16)
+delta_Emp_1_RoW.plot(kind='bar', color='red') 
+plt.title("Plot of delta employment of the Rest of the World")
+plt.xlabel("index")
+plt.ylabel("Employment difference with the baseline")
+plt.grid(True)
+
+plt.show()
 #%%
-
-df = delta_VA_s1.unstack()
-
-plt.figure(figsize=(15,8))
-
-bar_width = 0.35 
-sectors = df.columns
-index = range(len(sectors))
-
-plt.bar([i for i in index], df.loc['EU'], bar_width, label='EU', color='blue')
-plt.bar([i +bar_width for i in index], df.loc['RoW'], bar_width, label='RoW', color='red')
-
-plt.xlabel('Sectors')
-plt.ylabel('CO2')
-plt.title('CO2 by Sector: EU vs RoW')
-plt.xticks([i +bar_width/2 for i in idex], df.columns, rotation=45, ha='right')
-plt.legend()
-
-
-
-
-
-#%%
-
-
-data_exio.plot_matrix('E', x='Region_to',y='Value', 
-                    facet_col='Satellite account', color='Sector_to',
-                    base_scenario='baseline',
-                    filter_Satellite_account = ['CO2'],
-                    path = "Carbon plot",
-                    auto_open=True)
-        
-
-

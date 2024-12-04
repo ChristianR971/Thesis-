@@ -133,12 +133,12 @@ delta_VA_s1 = data_exio.query(
 
 
 
-#%%
+#%% CO2 plot
 
 CO2_s1.plot_matrix('E','Regions','red',y='Value',item='Sector',facet_row='CO2_emissions')
 
 
-#%%
+#%% MARIO matrix plot 
 delta_E_s1.plot(kind="bar", x='Region')
 delta_VA_s1.plot(kind="bar")
 

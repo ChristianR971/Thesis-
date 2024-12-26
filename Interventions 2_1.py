@@ -130,7 +130,7 @@ delta_Emp_1 = data_exio.query(
     matrices='E',
     scenarios='Intervention2.1',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_1_EU = delta_Emp_1.head(25)
@@ -147,7 +147,7 @@ delta_VA_s1 = data_exio.query(
     matrices="V",
     scenarios="Intervention2.1",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s1_EU = delta_VA_s1.head(25)
@@ -195,7 +195,7 @@ delta_Emp_2 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.2',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_2_EU = delta_Emp_2.head(25)
@@ -211,7 +211,7 @@ delta_VA_s2 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.2",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s2_EU = delta_VA_s2.head(22)
@@ -339,7 +339,7 @@ delta_VA_s4 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.4",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s4_EU = delta_VA_s4.head(25)
@@ -383,7 +383,7 @@ delta_Emp_5 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.5',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_5_EU = delta_Emp_5.head(25)
@@ -397,7 +397,7 @@ delta_VA_s5 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.5",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s5_EU = delta_VA_s5.head(25)
@@ -439,7 +439,7 @@ delta_Emp_6 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.6',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_6_EU = delta_Emp_6.head(25)
@@ -453,7 +453,7 @@ delta_VA_s6 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.6",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s6_EU = delta_VA_s6.head(25)
@@ -496,7 +496,7 @@ delta_Emp_7 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.7',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_7_EU = delta_Emp_7.head(25)
@@ -510,7 +510,7 @@ delta_VA_s7 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.7",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s7_EU = delta_VA_s7.head(25)
@@ -553,7 +553,7 @@ delta_Emp_8 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.8',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_8_EU = delta_Emp_8.head(16)
@@ -567,7 +567,7 @@ delta_VA_s8 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.8",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s8_EU = delta_VA_s8.head(16)
@@ -610,7 +610,7 @@ delta_Emp_9 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.9',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_9_EU = delta_Emp_9.head(25)
@@ -624,7 +624,7 @@ delta_VA_s9 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.9",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s9_EU = delta_VA_s9.head(25)
@@ -670,7 +670,7 @@ delta_Emp_10 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.10',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_10_EU = delta_Emp_10.head(25)
@@ -684,7 +684,7 @@ delta_VA_s10 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.10",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s10_EU = delta_VA_s10.head(25)
@@ -727,7 +727,7 @@ delta_Emp_11 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.11',
     base_scenario='baseline',
-    type='relative',
+    type='absolute'
     ).loc[Employment].sum()
 
 delta_Emp_11_EU = delta_Emp_11.head(25)
@@ -741,7 +741,7 @@ delta_VA_s11 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.11",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s11_EU = delta_VA_s11.head(16)
@@ -785,7 +785,7 @@ delta_Emp_12 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.12',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_12_EU = delta_Emp_12.head(25)
@@ -799,7 +799,7 @@ delta_VA_s12 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.12",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s12_EU = delta_VA_s12.head(25)
@@ -842,7 +842,7 @@ delta_Emp_13 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.13',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_13_EU = delta_Emp_13.head(25)
@@ -856,7 +856,7 @@ delta_VA_s13 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.13",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s13_EU = delta_VA_s13.head(25)
@@ -899,7 +899,7 @@ delta_Emp_14 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.14',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_14_EU = delta_Emp_14.head(25)
@@ -913,7 +913,7 @@ delta_VA_s14 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.14",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s14_EU = delta_VA_s14.head(25)
@@ -958,7 +958,7 @@ delta_Emp_15 = data_exio.query(
     matrices='E',
     scenarios='Intervention 2.15',
     base_scenario='baseline',
-    type='relative',
+    type='absolute',
     ).loc[Employment].sum()
 
 delta_Emp_15_EU = delta_Emp_15.head(25)
@@ -972,13 +972,13 @@ delta_VA_s15 = data_exio.query(
     matrices="V",
     scenarios="Intervention 2.15",
     base_scenario="baseline",
-    type='relative'
+    type='absolute'
     ).loc[(ValueAdded)].sum()
 
 delta_VA_s15_EU = delta_VA_s15.head(25)
 delta_VA_s15_RoW = delta_VA_s15.tail(25)
 
-#%%
+#%% Totals of CO2 emissions
 
 delta_E_s1_total = delta_E_s1.sum()
 delta_E_s2_total = delta_E_s2.sum()
@@ -996,7 +996,7 @@ delta_E_s13_total = delta_E_s13.sum()
 delta_E_s14_total = delta_E_s14.sum()
 delta_E_s15_total = delta_E_s15.sum()
 
-delta_totals = pd.Series({
+delta_E_totals = pd.Series({
     'S1': delta_E_s1_total,
     'S2': delta_E_s2_total,
     'S3': delta_E_s3_total,
@@ -1053,5 +1053,95 @@ for sector, (scenario, value) in max_reduction_scenarios.items():
     print(f"{sector}: {scenario} (reduction: {value:.2e})")
     
 
+#%% Totals of Employment
+delta_Emp_1_total = delta_Emp_1.sum()  
+delta_Emp_2_total = delta_Emp_2.sum()  
+delta_Emp_3_total = delta_Emp_3.sum() 
+delta_Emp_4_total = delta_Emp_4.sum() 
+delta_Emp_5_total = delta_Emp_5.sum()  
+delta_Emp_6_total = delta_Emp_6.sum()  
+delta_Emp_7_total = delta_Emp_7.sum()  
+delta_Emp_8_total = delta_Emp_8.sum()  
+delta_Emp_9_total = delta_Emp_9.sum() 
+delta_Emp_10_total = delta_Emp_10.sum()  
+delta_Emp_11_total = delta_Emp_11.sum()  
+delta_Emp_12_total = delta_Emp_12.sum() 
+delta_Emp_13_total = delta_Emp_13.sum()  
+delta_Emp_14_total = delta_Emp_14.sum()  
+delta_Emp_15_total = delta_Emp_15.sum() 
+
+delta_Emp_totals = pd.Series({
+    'S1': delta_Emp_1_total,
+    'S2': delta_Emp_2_total,
+    'S3': delta_Emp_3_total,
+    'S4': delta_Emp_4_total,
+    'S5': delta_Emp_5_total,
+    'S6': delta_Emp_6_total,
+    'S7': delta_Emp_7_total,
+    'S8': delta_Emp_8_total,
+    'S9': delta_Emp_9_total,
+    'S10': delta_Emp_10_total,
+    'S11': delta_Emp_11_total,
+    'S12': delta_Emp_12_total,
+    'S13': delta_Emp_13_total,
+    'S14': delta_Emp_14_total,
+    'S15': delta_Emp_15_total
+})
+
+
+#%% Totals of Value Added
+
+# Summing delta_VA for VA
+delta_VA_1_total = delta_VA_s1.sum()
+delta_VA_2_total = delta_VA_s2.sum()
+delta_VA_3_total = delta_VA_s3.sum()
+delta_VA_4_total = delta_VA_s4.sum()
+delta_VA_5_total = delta_VA_s5.sum()
+delta_VA_6_total = delta_VA_s6.sum()
+delta_VA_7_total = delta_VA_s7.sum()
+delta_VA_8_total = delta_VA_s8.sum()
+delta_VA_9_total = delta_VA_s9.sum()
+delta_VA_10_total = delta_VA_s10.sum()
+delta_VA_11_total = delta_VA_s11.sum()
+delta_VA_12_total = delta_VA_s12.sum()
+delta_VA_13_total = delta_VA_s13.sum()
+delta_VA_14_total = delta_VA_s14.sum()
+delta_VA_15_total = delta_VA_s15.sum()
+
+# Creating a Series for all delta_VA totals
+delta_VA_totals = pd.Series({
+    'S1': delta_VA_1_total,
+    'S2': delta_VA_2_total,
+    'S3': delta_VA_3_total,
+    'S4': delta_VA_4_total,
+    'S5': delta_VA_5_total,
+    'S6': delta_VA_6_total,
+    'S7': delta_VA_7_total,
+    'S8': delta_VA_8_total,
+    'S9': delta_VA_9_total,
+    'S10': delta_VA_10_total,
+    'S11': delta_VA_11_total,
+    'S12': delta_VA_12_total,
+    'S13': delta_VA_13_total,
+    'S14': delta_VA_14_total,
+    'S15': delta_VA_15_total
+})
+
 #%%
-delta_Emp_1_total = delta_Emp_1.sum()
+
+# data = {
+#     'Delta_E': delta_E_totals,
+#     'Delta_Emp': delta_Emp_totals,
+#     'Delta_VA': delta_VA_totals
+# }
+
+# # Convert to DataFrame
+# df = pd.DataFrame(data)
+
+# # Save to Excel
+# df.to_excel('output.xlsx', index=False)
+
+# print("Data saved to output.xlsx")
+
+#%%
+

@@ -1150,117 +1150,54 @@ print("Data exported to 'intervention_results.xlsx'")
 
 #%%
 
-emissions_5 = [-1.7E+08, -7.2E+07, -5.7E+08, -3.1E+08, -4.5E+07, -4.9E+08, -7562338, 
-               -2337377, -3448642, -1.4E+07, -1.8E+08, 37608273, -3.3E+08, -1.9E+07, -4.1E+08]
+# Convert scientific notation with commas to standard format
+emissions_5 = [-1.7e8, -7.2e7, -5.7e8, -5.2e8, -4.4e7, -4.9e8, -7564996, -2316349, -3448642, -1.4e7, -1.8e8, 37608273, -3.3e8, -5.5e7, -4.1e8]
+emissions_2 = [-1.4E+08, -5E+07, -4.5E+08, -3.6E+08, -2.2E+07, -3.4E+08, -3577823, -1103177, -2235471, -1E+07, -9.1E+07, 25502605, -3.1E+08, -3.5E+07, -3.4E+08]
+emissions_05 = [-1.2E+08, -3.9E+07, -3.9E+08, -2.9E+08, -7972998, -2.6E+08, -1584237, -496592, -1628885, -8107251, -4.7E+07, 19449772, -3E+08, -4.1E+07, -3.1E+08]
+emissions_0 = [-117423057.3, -35516080.36, -379481916, -261504734.9, -7610589.044, -239377416.2, -919707.8518, -294396.2818, -1426689.687, -7442722.482, -32008990.82, 17432160.44, -300243948.9, -43676056.62, -297534563.5]
 
-emissions_2 = [-1.4E+08, -5E+07, -4.5E+08, -2.2E+08, -2.4E+07, -3.4E+08, -3575165, 
-               -1124206, -2235471, -1E+07, -9.1E+07, 25502605, -3.1E+08, -3.4E+07, -3.4E+08]
-
-emissions_0 = [-117423057.3, -35516080.36, -379481916, -261504734.9, -7610589.044,
-               -239377416.2, -3455549.736, -294396.2818, -1426689.687, -7442722.482,
-               -32008990.82, 17432160.44, -300243948.9, -43676056.62, -297534563.5]
-
-plt.figure(figsize=(12, 10))
+plt.figure(figsize=(15, 12))
 y = np.arange(len(emissions_5))
-width = 0.25
+width = 0.2
 
-plt.barh(y - width, emissions_5, width, label='5% Sensitivity', color='darkred', alpha=0.7)
-plt.barh(y, emissions_2, width, label='2% Sensitivity', color='lightcoral', alpha=0.7)
-plt.barh(y + width, emissions_0, width, label='Counterfactual', color='indianred', alpha=0.7)
+plt.barh(y - width*1.5, emissions_5, width, label='5% Sensitivity', color='darkred', alpha=0.7)
+plt.barh(y - width*0.5, emissions_2, width, label='2% Sensitivity', color='lightcoral', alpha=0.7)
+plt.barh(y + width*0.5, emissions_05, width, label='0.5% Sensitivity', color='indianred', alpha=0.7)
+plt.barh(y + width*1.5, emissions_0, width, label='Counterfactual', color='rosybrown', alpha=0.7)
 
-plt.title('Delta Emissions: Sensitivity Analysis Comparison')
-plt.xlabel('Delta Emissions from Baseline')
-plt.ylabel('Intervention Number')
-plt.yticks(y, [f'Int {i+1}' for i in range(len(emissions_5))])
+def format_ticks(x, _):
+    return f'{x/1e6:,.0f}M'
+
+plt.gca().xaxis.set_major_formatter(plt.FuncFormatter(format_ticks))
+
+plt.title('Delta Emissions: Sensitivity Analysis Comparison', fontsize=14, pad=20)
+plt.xlabel('Delta Emissions from Baseline (Millions)', fontsize=12)
+plt.ylabel('Intervention Number', fontsize=12)
+plt.yticks(y, [f'Int {i+1}' for i in range(len(emissions_5))], fontsize=10)
+
 plt.grid(True, linestyle='--', alpha=0.7, axis='x')
-plt.legend()
-
+plt.legend(bbox_to_anchor=(0.5, -0.1), loc='upper center', ncol=4)
 plt.tight_layout()
-plt.savefig('emissions_comparison_horizontal.png', dpi=100)
+
+plt.savefig('emissions_comparison_horizontal.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 
-
 #%%
-# Data setup
-emissions_5 = [-173338802.2, -71756973.84, -566736518.9, -312864638.2, -45301122.08,
-               -490824164.7, -10100837.64, -2316348.787, -3448642.191, -14088010.34,
-               -180198757.6, 37608273.48, -326028667.2, -18876608.71, -405728941.7]
-
-emissions_2 = [-139789355, -50012438.34, -445293014.8, -220845630.6, -9060225.025,
-               -339956130, -6113664.903, -1103177.286, -2235470.689, -10100837.64,
-               -37936581.66, 25502605.47, -310557835.5, -33756277.71, -340812315.4]
-
-# Create plot
-plt.figure(figsize=(15, 10))
-x = np.arange(len(emissions_5))
-width = 0.35
-
-plt.bar(x - width/2, emissions_5, width, label='5% Sensitivity', color='darkred', alpha=0.7)
-plt.bar(x + width/2, emissions_2, width, label='2% Sensitivity', color='lightcoral', alpha=0.7)
-
-plt.title('Delta Emissions: 5% vs 2% Sensitivity Analysis')
-plt.xlabel('Intervention Number')
-plt.ylabel('Delta Emissions')
-plt.xticks(x, [f'Int {i+1}' for i in range(len(emissions_5))])
-plt.grid(True, linestyle='--', alpha=0.7, axis='y')
-plt.legend()
-
-plt.tight_layout()
-plt.savefig('emissions_comparison.png', dpi=100)
-plt.show()
-
-#%%
-
-
-emissions_5 = [-173338802.2, -71756973.84, -566736518.9, -312864638.2, -45301122.08,
-               -490824164.7, -10100837.64, -2316348.787, -3448642.191, -14088010.34,
-               -180198757.6, 37608273.48, -326028667.2, -18876608.71, -405728941.7]
-
-emissions_2 = [-139789355, -50012438.34, -445293014.8, -220845630.6, -9060225.025,
-               -339956130, -6113664.903, -1103177.286, -2235470.689, -10100837.64,
-               -37936581.66, 25502605.47, -310557835.5, -33756277.71, -340812315.4]
-
-emissions_0 = [-117423057.3, -35516080.36, -379481916, -261504734.9, -7610589.044,
-               -239377416.2, -3455549.736, -294396.2818, -1426689.687, -7442722.482,
-               -32008990.82, 17432160.44, -300243948.9, -43676056.62, -297534563.5]
-
-plt.figure(figsize=(12, 10))
-y = np.arange(len(emissions_5))
-width = 0.25
-
-plt.barh(y - width, emissions_5, width, label='5% Sensitivity', color='darkredw', alpha=0.7)
-plt.barh(y, emissions_2, width, label='2% Sensitivity', color='lightcoral', alpha=0.7)
-plt.barh(y + width, emissions_0, width, label='Baseline', color='indianred', alpha=0.7)
-
-plt.title('Delta Emissions: Sensitivity Analysis Comparison')
-plt.xlabel('Delta Emissions from Baseline')
-plt.ylabel('Intervention Number')
-plt.yticks(y, [f'Int {i+1}' for i in range(len(emissions_5))])
-plt.grid(True, linestyle='--', alpha=0.7, axis='x')
-plt.legend()
-
-plt.tight_layout()
-plt.savefig('emissions_comparison_horizontal.png', dpi=100)
-plt.show()
-
-#%%
-
-# Calculate totals
+# Calculate totals 
 emissions_5_totals = sum(emissions_5)
 emissions_2_totals = sum(emissions_2)
+emissions_05_totals = sum(emissions_05)
 emissions_0_totals = sum(emissions_0)
 
 # Create plot
 plt.figure(figsize=(10, 6))
-
-x = np.arange(3)
-totals = [emissions_5_totals, emissions_2_totals, emissions_0_totals]
-labels = ['5% Sensitivity', '2% Sensitivity', 'Counterfactual']
-colors = ['darkred', 'lightcoral', 'indianred']
+x = np.arange(4)  # Changed to 4 to accommodate the new level
+totals = [emissions_5_totals, emissions_2_totals, emissions_05_totals, emissions_0_totals]
+labels = ['5% Sensitivity', '2% Sensitivity', '0.5% Sensitivity', 'Counterfactual']
+colors = ['darkred', 'red', 'lightcoral', 'indianred']
 
 bars = plt.bar(x, totals, color=colors, alpha=0.7)
-
 plt.title('Total Delta Emissions Across All Interventions')
 plt.ylabel('Total Delta Emissions')
 plt.xticks(x, labels)
@@ -1276,89 +1213,125 @@ for bar in bars:
 plt.tight_layout()
 plt.savefig('total_emissions_comparison.png', dpi=100)
 plt.show()
-
 #%%
 
+emp_5 = [13.45501, -3.62794, -13.722, -16.9506, -2.21707, -16.1403, -0.22911, -0.0085, -0.01265, -0.42666, -2.19292, 2.555149, 9.859014, 3.731762, -4.65236]
+emp_2 = [10.85082, -2.52856, -10.8024, -11.9894, -1.1177, -11.1791, -0.10836, -0.00405, -0.0082, -0.30591, -1.11089, 1.732676, 5.963454, 3.477252, -3.90798]
+emp_05 = [9.54872, -1.97888, -9.34261, -9.50887, -0.4031, -8.69855, -0.04798, -0.00182, -0.00598, -0.24553, -0.56987, 1.32144, 4.015674, 3.046632, -3.53629]
+emp_0 = [9.114687303, -1.795646081, -8.75869875, -8.103213209, -3.847812739, -7.871692884, -0.02785362, 0.02911293, -0.005233698, -0.225405011, -0.389532033, 1.184360868, 3.36641353, 2.890169701, -3.41173282]
 
+plt.figure(figsize=(15, 12))
+y = np.arange(len(emp_5))
+width = 0.2
 
-# Data for the datasets
-delta_employment_2 = [
-    10.8508183, -2.528562781, -10.70507568, -2.121789254, -1.190989774,
-    -11.1791258, -0.108274908, -0.004124058, -0.008200646, -0.3059068,
-    -1.110887636, 1.732676112, 5.963453707, 3.51601986, -3.907984833
-]
+plt.barh(y - width*1.5, emp_5, width, label='5% Sensitivity', color='darkblue', alpha=0.7)
+plt.barh(y - width*0.5, emp_2, width, label='2% Sensitivity', color='royalblue', alpha=0.7)
+plt.barh(y + width*0.5, emp_05, width, label='0.5% Sensitivity', color='cornflowerblue', alpha=0.7)
+plt.barh(y + width*1.5, emp_0, width, label='Counterfactual', color='lightsteelblue', alpha=0.7)
 
-delta_employment_5 = [
-    13.45501485, -3.627937756, -13.62464068, -2.999770965, -2.290364857,
-    -16.14027399, -0.229027592, -0.008574482, -0.012651069, -0.426659483,
-    -2.192921007, 2.555149007, 9.859014447, 4.454795137, -4.652362838
-]
+plt.title('Delta Employment: Sensitivity Analysis Comparison', fontsize=14, pad=20)
+plt.xlabel('Delta Employment (FTE)', fontsize=12)
+plt.ylabel('Intervention Number', fontsize=12)
+plt.yticks(y, [f'Int {i+1}' for i in range(len(emp_5))], fontsize=10)
 
-counterfactual = [
-    9.114687303, -1.795646081, -8.75869875, -8.103213209, -3.847812739,
-    -7.871692884, 1.85265913, 0.02911293, -0.005233698, -0.225405011,
-    -0.389532033, 1.184360868, 3.36641353, 2.890169701, -3.41173282
-]
-
-# Interventions
-interventions = np.arange(1, 16)
-
-# Creating the bar chart with specified order: 5%, 2%, Counterfactual
-bar_width = 0.25
-y_positions = np.arange(len(interventions))
-
-plt.figure(figsize=(12, 8))
-
-plt.barh(y_positions - bar_width, delta_employment_5, height=bar_width, label="Delta Employment 5%", color='navy', alpha=0.7)
-plt.barh(y_positions, delta_employment_2, height=bar_width, label="Delta Employment 2%", color='blue', alpha=0.7)
-plt.barh(y_positions + bar_width, counterfactual, height=bar_width, label="Counterfactual", color='lightblue', alpha=0.7)
-
-# Adding labels, title, and legend
-plt.xlabel("Employment Impact Value (1000 p)", fontsize=12)
-plt.ylabel("Interventions", fontsize=12)
-plt.yticks(y_positions, [f"Intervention {i}" for i in interventions])
-plt.axvline(0, color='black', linewidth=0.8, linestyle='--', alpha=0.7)
-plt.title("Sensitivity analysis of Employment Impact Across Interventions ", fontsize=14)
-plt.legend(fontsize=12)
-plt.grid(alpha=0.4, axis='x')
-
-# Display the chart
+plt.grid(True, linestyle='--', alpha=0.7, axis='x')
+plt.legend(bbox_to_anchor=(0.5, -0.1), loc='upper center', ncol=4)
 plt.tight_layout()
+
+plt.savefig('employment_comparison_horizontal.png', dpi=300, bbox_inches='tight')
 plt.show()
 
 #%%
 
 
-# Data
-va_5 = [652.1843, -140.751, -601.204, -136.935, -88.8578, -707.862, -8.612, 
-        -0.43171, -0.63697, -16.0435, -108.768, 115.7734, 516.163, 194.6676, -227.917]
-
-va_2 = [525.9551, -98.099, -472.375, -96.8561, -46.2061, -490.281, -4.0714,
-        -0.20764, -0.41289, -11.5029, -55.0997, 78.50726, 315.3372, 153.085, -191.45]
-
-va_0 = [441.8022859, -69.66453618, -386.48829, -355.381422, -149.2811376, -345.2276694,
-        95.95976738, 2.027421375, -0.263510378, -0.003736317, -19.32067971, 53.66318678,
-        181.4532891, 125.3632053, -167.1392149]
-
-# Calculate totals
-va_5_total = sum(va_5)
-va_2_total = sum(va_2)
-va_0_total = sum(va_0)
+# Calculate totals for employment
+employment_5_totals = sum(emp_5)
+employment_2_totals = sum(emp_2)
+employment_05_totals = sum(emp_05)
+employment_0_totals = sum(emp_0)
 
 # Create plot
 plt.figure(figsize=(10, 6))
-
-x = np.arange(3)
-totals = [va_5_total, va_2_total, va_0_total]
-labels = ['5% Sensitivity', '2% Sensitivity', 'Baseline']
-colors = ['darkgreen', 'lightgreen', 'forestgreen']
+x = np.arange(4)
+totals = [employment_5_totals, employment_2_totals, employment_05_totals, employment_0_totals]
+labels = ['5% Sensitivity', '2% Sensitivity', '0.5% Sensitivity', 'Counterfactual']
+colors = ['darkblue', 'blue', 'cornflowerblue', 'lightsteelblue']
 
 bars = plt.bar(x, totals, color=colors, alpha=0.7)
-
-plt.title('Total Delta Value Added Across All Interventions')
-plt.ylabel('Total Delta Value Added (M€)')
+plt.title('Total Delta Employment Across All Interventions')
+plt.ylabel('Total Delta Employment (FTE)')
 plt.xticks(x, labels)
 plt.grid(True, linestyle='--', alpha=0.7, axis='y')
+
+# Add value labels on bars
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width()/2., height,
+             f'{height:,.0f}',
+             ha='center', va='bottom')
+
+plt.tight_layout()
+plt.savefig('total_employment_comparison.png', dpi=100)
+plt.show()
+#%%
+
+
+#%%
+
+# Data
+va_0 = [441.8023, -69.6645, -386.488, -377.139, -14.9281, -345.228, 
+        -1.04736, -0.05438, -0.26351, -8.47579, -19.3207, 53.66319, 
+        181.4533, 125.3632, -167.139]
+va_05 = [462.8405, -76.7732, -412.254, -417.029, -15.639, -381.491, 
+         -1.80413, -0.09172, -0.30086, -9.23255, -28.2654, 59.8742, 
+         214.9243, 132.2936, -173.241]
+va_2 = [525.9551, -98.099, -476.669, -525.819, -43.3626, -490.281, 
+        -4.07443, -0.20376, -0.41289, -11.5029, -55.0997, 78.50726, 
+        315.3372, 151.6461, -191.45]
+va_5 = [652.1843, -140.751, -605.498, -743.4, -86.0144, -707.862, 
+        -8.61503, -0.42783, -0.63697, -16.0435, -108.768, 115.7734, 
+        516.163, 161.6252, -227.917]
+
+# First plot: Horizontal bar chart
+plt.figure(figsize=(15, 10))
+y = np.arange(len(va_0))
+width = 0.2
+
+# Plot bars
+plt.barh(y - width*1.5, va_0, width, label='Baseline', color='#ffd700', alpha=0.8)
+plt.barh(y - width/2, va_05, width, label='0.5% Sensitivity', color='#ffc400', alpha=0.8)
+plt.barh(y + width/2, va_2, width, label='2% Sensitivity', color='#ffb300', alpha=0.8)
+plt.barh(y + width*1.5, va_5, width, label='5% Sensitivity', color='#ffa000', alpha=0.8)
+
+# Customize plot
+plt.title('Delta Value Added: Sensitivity Analysis by Intervention', pad=20, fontsize=18, fontweight='bold')
+plt.xlabel('Delta Value Added (M€)', fontsize=14)
+plt.ylabel('Interventions', fontsize=14)
+plt.yticks(y, [f'Int {i+1}' for i in range(len(va_0))])
+plt.grid(True, linestyle='--', alpha=0.3, axis='x')
+plt.legend(bbox_to_anchor=(0.5, -0.15), loc='upper center', ncol=4)
+
+plt.tight_layout()
+plt.savefig('value_added_comparison_horizontal.png', dpi=300, bbox_inches='tight')
+plt.show()
+
+# Second plot: Total values
+plt.figure(figsize=(10, 6))
+x = np.arange(4)
+
+# Calculate totals
+totals = [sum(va_5), sum(va_2), sum(va_05), sum(va_0)]
+labels = ['5% Sensitivity', '2% Sensitivity', '0.5% Sensitivity', 'Baseline']
+colors = ['#ffa000', '#ffb300', '#ffc400', '#ffd700']
+
+# Create bars
+bars = plt.bar(x, totals, color=colors, alpha=0.8)
+
+# Customize plot
+plt.title('Total Delta Value Added Across All Interventions', fontsize=14, fontweight='bold')
+plt.ylabel('Total Delta Value Added (M€)')
+plt.xticks(x, labels, rotation=45, ha='right')
+plt.grid(True, linestyle='--', alpha=0.3, axis='y')
 
 # Add value labels on bars
 for bar in bars:
@@ -1368,37 +1341,5 @@ for bar in bars:
              ha='center', va='bottom')
 
 plt.tight_layout()
-plt.savefig('total_value_added_comparison.png', dpi=100)
-plt.show()
-
-#%%
-
-# Data
-va_5 = [652.1843, -140.751, -601.204, -136.935, -88.8578, -707.862, -8.612, 
-        -0.43171, -0.63697, -16.0435, -108.768, 115.7734, 516.163, 194.6676, -227.917]
-
-va_2 = [525.9551, -98.099, -472.375, -96.8561, -46.2061, -490.281, -4.0714,
-        -0.20764, -0.41289, -11.5029, -55.0997, 78.50726, 315.3372, 153.085, -191.45]
-
-va_0 = [441.8022859, -69.66453618, -386.48829, -355.381422, -149.2811376, -345.2276694,
-        95.95976738, 2.027421375, -0.263510378, -0.003736317, -19.32067971, 53.66318678,
-        181.4532891, 125.3632053, -167.1392149]
-
-plt.figure(figsize=(12, 10))
-y = np.arange(len(va_5))
-width = 0.25
-
-plt.barh(y - width, va_5, width, label='5% Sensitivity', color='darkgreen', alpha=0.7)
-plt.barh(y, va_2, width, label='2% Sensitivity', color='forestgreen', alpha=0.7)
-plt.barh(y + width, va_0, width, label='Counterfactual', color='lightgreen', alpha=0.7)
-
-plt.title('Delta Value Added: Sensitivity Analysis Comparison')
-plt.xlabel('Delta Value Added (M€)')
-plt.ylabel('Intervention Number')
-plt.yticks(y, [f'Int {i+1}' for i in range(len(va_5))])
-plt.grid(True, linestyle='--', alpha=0.7, axis='x')
-plt.legend()
-
-plt.tight_layout()
-plt.savefig('value_added_comparison_horizontal.png', dpi=100)
+plt.savefig('total_value_added_comparison.png', dpi=300)
 plt.show()

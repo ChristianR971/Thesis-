@@ -457,7 +457,7 @@ for (row, col), cell in table.get_celld().items():
         value = float(cell.get_text().get_text())
         if value > 0.85:
             cell.set_facecolor('lightgreen')
-        elif value < 0.42:
+        elif value < 0.40:
             cell.set_facecolor('lightcoral')
         elif row % 2 == 1:
             cell.set_facecolor('#f9f9f9')
@@ -565,6 +565,94 @@ def create_table_plot(data):
 plot = create_table_plot(data)
 plot.show()
 
+#%%
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Create the data
+data = {
+    'DMUs': [
+        '1. Steel Modular Design', '2. Steel Scrap Diversion', '3. Steel Improved yield',
+        '4. Steel Weight Optimization', '5. Steel Rebar waste into nails', '6. Steel 3D printing',
+        '7. Aluminium Plastic deformation', '8. Aluminium Pyrolysis recycling',
+        '9. Aluminium Design for disassembly', '10. Aluminium Optimize facade designs',
+        '11. Concrete Recycled Aggregate', '12. Concrete Reuse cement slag',
+        '13. Concrete 3D printing', '14. Concrete Sustainable Concrete',
+        '15. Concrete Fly-ash as recycled cement'
+    ],
+    'Common Weights': [1.000, 0.417, 0.451, 0.348, 0.437, 0.356, 0.442, 0.443, 0.443, 0.442, 0.458, 0.476, 0.905, 0.606, 0.586],
+    'M priority Emissions': [0.9386, 0.4013, 0.7221, 0.5459, 0.3850, 0.5319, 0.3813, 0.3806, 0.3812, 0.3874, 0.4220, 0.3908, 1, 0.5411, 0.7507],
+    'M priority Employment': [1, 0.4184, 0.3320, 0.2623, 0.4550, 0.2795, 0.4644, 0.4649, 0.4650, 0.4609, 0.4698, 0.5072, 0.8421, 0.6249, 0.5113],
+    'M priority Value Added': [1, 0.4068, 0.3165, 0.2476, 0.4407, 0.2648, 0.4495, 0.4500, 0.4500, 0.4465, 0.4541, 0.4929, 0.8393, 0.6094, 0.4901],
+    
+}
+
+def create_table_plot(data):
+    # Create DataFrame
+    df = pd.DataFrame(data)
+    
+    # Define the desired order
+    desired_order = [1, 13, 14, 15, 12, 11, 3, 9, 8, 7, 10, 5, 2, 6, 4]
+    
+    # Extract number from DMUs and create sort key
+    def get_sort_position(dmu_str):
+        # Extract the number from the start of the string
+        num = int(dmu_str.split('.')[0])
+        # Find its position in desired_order (0-based index)
+        return desired_order.index(num)
+    
+    # Add sort key and sort
+    df['sort_key'] = df['DMUs'].apply(get_sort_position)
+    df = df.sort_values('sort_key')
+    df = df.drop('sort_key', axis=1)
+    
+    # Format numeric columns to 3 decimals
+    df = df.applymap(lambda x: f'{x:.3f}' if isinstance(x, (int, float)) else x)
+    
+    # Create figure and axis
+    fig, ax = plt.subplots(figsize=(14, 8))
+    ax.axis('tight')
+    ax.axis('off')
+    
+    # Create the table
+    table = ax.table(cellText=df.values,
+                    colLabels=df.columns,
+                    loc='center',
+                    cellLoc='center')
+    
+    # Style the header row (grey background)
+    for j, key in enumerate(df.columns):
+        cell = table[0, j]
+        cell.set_facecolor('#e6e6e6')  # Light grey color
+        cell.set_text_props(weight='bold')
+    
+    # Set cell colors based on values
+    for i in range(len(df)):
+        for j in range(1, 5):  # Skip the DMUs column
+            cell = table[i+1, j]
+            value = float(cell.get_text().get_text())
+            if value >= 0.850:
+                cell.set_facecolor('lightgreen')
+            elif value <= 0.400:
+                cell.set_facecolor('lightcoral')
+            else:
+                cell.set_facecolor('white')
+    
+    # Adjust table style
+    table.auto_set_font_size(False)
+    table.set_fontsize(9)
+    table.scale(1.2, 1.5)
+    
+    # Add title
+    plt.title('DEA Medium Priority Results', pad=20)
+    
+    plt.tight_layout()
+    return plt
+
+# Create and show the plot
+plot = create_table_plot(data)
+plot.show()
 #%% Priority analysis of common weights: High priority 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -653,6 +741,97 @@ def create_table_plot(data):
 plot = create_table_plot(data)
 plot.show()
 
+#%%
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Updated data for High Priority
+data = {
+    'DMUs': [
+        '1. Steel Modular Design', '2. Steel Scrap Diversion', '3. Steel Improved yield', '4. Steel Weight Optimization', 
+        '5. Steel Rebar waste into nails', '6. Steel 3D printing', '7. Aluminium Plastic deformation', 
+        '8. Aluminium Pyrolysis recycling', '9. Aluminium Design for disassembly', '10. Aluminium Optimize facade designs', 
+        '11. Concrete Recycled Aggregate', '12. Concrete Reuse cement slag', '13. Concrete 3D printing', 
+        '14. Sustainable Concrete', '15. Concrete Fly-ash as recycled cement'
+    ],
+    'Common Weights': [1.000, 0.417, 0.451, 0.348, 0.437, 0.356, 0.442, 0.443, 0.443, 0.442, 0.458, 0.476, 0.905, 0.606, 0.586],
+    'H priority Emissions': [0.5811, 0.2671, 1, 0.7437, 0.1916, 0.6953, 
+                             0.1731, 0.1712, 0.1721, 0.189, 0.246, 0.138, 
+                             0.8982, 0.2845, 0.8364],
+    'H priority Employment': [1, 0.4206, 0.1527, 0.1332, 0.4818, 0.1641, 
+                               0.4973, 0.4984, 0.4983, 0.4893, 0.4869, 0.5539, 
+                               0.7478, 0.654, 0.3988],
+    'H priority Value Added': [1, 0.3916, 0.1138, 0.0965, 0.4462, 0.1274, 
+                               0.4601, 0.461, 0.4609, 0.4533, 0.4476, 0.518, 
+                               0.7408, 0.6152, 0.3459],
+    
+}
+
+def create_table_plot(data):
+    # Create DataFrame
+    df = pd.DataFrame(data)
+    
+    # Define the desired order
+    desired_order = [1, 13, 14, 15, 12, 11, 3, 9, 8, 7, 10, 5, 2, 6, 4]
+    
+    # Extract number from DMUs and create sort key
+    def get_sort_position(dmu_str):
+        # Extract the number from the start of the string
+        num = int(dmu_str.split('.')[0])
+        # Find its position in desired_order (0-based index)
+        return desired_order.index(num)
+    
+    # Add sort key and sort
+    df['sort_key'] = df['DMUs'].apply(get_sort_position)
+    df = df.sort_values('sort_key')
+    df = df.drop('sort_key', axis=1)
+    
+    # Format numeric columns to 3 decimals
+    df = df.applymap(lambda x: f'{x:.3f}' if isinstance(x, (int, float)) else x)
+    
+    # Create figure and axis
+    fig, ax = plt.subplots(figsize=(14, 8))
+    ax.axis('tight')
+    ax.axis('off')
+    
+    # Create the table
+    table = ax.table(cellText=df.values,
+                    colLabels=df.columns,
+                    loc='center',
+                    cellLoc='center')
+    
+    # Style the header row (grey background)
+    for j, key in enumerate(df.columns):
+        cell = table[0, j]
+        cell.set_facecolor('#e6e6e6')  # Light grey color
+        cell.set_text_props(weight='bold')
+    
+    # Set cell colors based on values
+    for i in range(len(df)):
+        for j in range(1, 5):  # Skip the DMUs column
+            cell = table[i+1, j]
+            value = float(cell.get_text().get_text())
+            if value >= 0.850:
+                cell.set_facecolor('lightgreen')
+            elif value <= 0.400:
+                cell.set_facecolor('lightcoral')
+            else:
+                cell.set_facecolor('white')
+    
+    # Adjust table style
+    table.auto_set_font_size(False)
+    table.set_fontsize(9)
+    table.scale(1.2, 1.4)
+    
+    # Add title
+    plt.title('DEA High Priority Results', pad=20)
+    
+    plt.tight_layout()
+    return plt
+
+# Create and show the plot
+plot = create_table_plot(data)
+plot.show()
 #%% Optional: DEA with both conventional and common weights 
 import numpy as np
 from scipy.optimize import linprog
